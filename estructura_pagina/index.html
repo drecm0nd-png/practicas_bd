@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bombillo</title>
+    <link rel="diseño" href="styles.css">
+</head>
+<body>
+    
+    <h1> Bombillo detallado en código <h1>
+    <p> Al encender el Bombillo, el tema pasa a oscuro; al apagarlo vuelve a claro. </p>
+    <div id = "app">
+    <div id = "lamp">
+    <div id = "bulb"
+        :style = "{
+            backgroung : lightOn
+            ? 'radial-gradient(circle at 50% 30%, purple 40%, orange 100%)'
+            : 'radial-gradient(circle at 50% 30%, #ddd 40%, #aaa 100%)',
+            boxShadow : lightOn ? 0 0 50 px purple : 'none'
+        }">
+    </div>
+    <div id = "neck"> </div>
+    <div id = "base"> </div>
+    </div>
+
+    <button v-onclik = "lightOn"> {{ lightOn ? 'Apagar bombillo' : 'Encender bombillo' }} </button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="logica/app.js"></script>
+
+</body>
+</html>
