@@ -48,8 +48,8 @@ class Instructor (models.Model):
     salario_basico = models.DecimalField(max_digits=10, decimal_places=2)
     programado = models.BooleanField(default=True)
 
-def __str__(self):
-    return f'Num document: {self.documento} | Nombre: {self.nombre}'
+    def __str__(self):
+        return f'Num document: {self.documento} | Nombre: {self.nombre}'
 
 class Futbolista(models.Model):
     nombre = models.CharField(max_length=100)
@@ -57,5 +57,36 @@ class Futbolista(models.Model):
     fecha_nacimiento = models.DateField()
     peso = models.DecimalField(max_digits=10, decimal_places=2)
 
-def __str__(self):
-    return f'Nombre {self.nombre}'
+    def __str__(self):
+        return f'Nombre {self.nombre}'
+
+    def __str__(self):
+        return f'Nombre alcalde: {self.nombre}'
+
+class Municipio (models.Model):
+    codigo_dane = models.CharField(max_length=10, unique=True)
+    nombre_municipio = models.CharField(max_length=100)
+    habitantes = models.PositiveIntegerField()
+    municipio_vencino = models.TextField()
+
+    def __str__(self):
+        return f'Nombre municipio: {self.nombre_municipio}'
+    
+class Vereda (models.Model):
+    codigo = models.CharField(max_length=20, unique=True)
+    nombre = models.CharField(max_length=100)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
+    # Enlazar la vereda con municipio Uno a Muchos.
+    municipio = models.ForeignKey(Municipio, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'Nombre vereda: {self.nombre}'
+    
+class Alcalde (models.Model):
+    tipo_doc = models.CharField(max_length=5, default='C.C')
+    documento = models.CharField(max_length=20, unique=True)
+    apellido1 = models.CharField(max_length=100)
+    apellido2 = models.CharField(max_length=100)
+    correo = models.EmailField()
+    municipio = models.ForeignKey('municipio', on_delete=models.CASCADE)
+    municipio = models.OneToOneField(Municipio, on_delete=models.CASCADE)
